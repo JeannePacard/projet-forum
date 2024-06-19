@@ -17,7 +17,7 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	title := r.FormValue("title")
-	content := r.FormValue("content")
+	content := r.FormValue("content") 
 	author := r.FormValue("author")
 	category := r.FormValue("category")
 

@@ -17,7 +17,8 @@ func Routes() {
 	http.HandleFunc("/", templates.Home)
 
 	http.HandleFunc("/news", templates.News)
-	http.HandleFunc("/news/", templates.SingleNews)
+	http.HandleFunc("/news/", templates.SingleNew)
+	http.HandleFunc("/news/create", middlewares.RequireRole([]string{"admin"}, templates.CreateNews))
 
 	http.HandleFunc("/posts", templates.Posts)
 	http.HandleFunc("/posts/create", middlewares.RequireRole([]string{"admin", "user"}, templates.CreatePost))
@@ -28,7 +29,7 @@ func Routes() {
 	http.HandleFunc("/legalnotice", templates.Legalnotice)
 
 	http.HandleFunc("/admin", ServeFileHandler("./web/pages/admin.html"))
-
+	
 	http.HandleFunc("/profile", templates.Profile)
 
 	http.HandleFunc("/signup", ServeFileHandler("./web/pages/signup.html"))

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BEEP-BO - {{ .CurrentUser.FirstName }}</title>
+    <title>BEEP-BO - Create post</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link
       rel="shortcut icon"
@@ -77,71 +77,75 @@
       <section
         class="flex flex-col gap-8 items-center justify-center text-center"
       >
-        <h1 class="text-6xl font-medium leading-tight">Profile</h1>
+        <h1 class="text-6xl font-medium leading-tight">
+          Hey {{ .CurrentUser.FirstName }},
+        </h1>
 
-        <p class="px-4 py-2 bg-blue-800/50 text-blue-600 rounded-full">
-          Role: {{ .CurrentUser.Role }}
-        </p>
+        <h2 class="text-4xl">Create a news</h2>
       </section>
-
-      {{ if eq .CurrentUser.Role "admin" }}
-
-      <section
-        class="flex flex-col gap-8 items-center justify-center text-center"
-      >
-        <a
-          class="px-4 py-2 bg-blue-800/50 text-blue-600 rounded-full"
-          href="/news/create"
-        >
-          Create a news
-        </a>
-      </section>
-
-      {{ end }}
 
       <form
-        method="POST"
+        method="post"
+        action="/api/news"
         class="flex flex-col gap-8 mx-auto w-full max-w-[420px]"
       >
         <div class="flex flex-col gap-4">
-          <div class="flex gap-4">
-            <div>
-              <label for="lastName" class="block mb-2 text-sm font-medium"
-                >Last name</label
-              >
-              <input
-                type="text"
-                class="bg-gray-800 border border-gray-600 text-white rounded-md block w-full px-4 py-2"
-                placeholder="Wolff"
-                name="lastName"
-                value="{{ .CurrentUser.LastName }}"
-              />
-            </div>
-
-            <div>
-              <label for="firstName" class="block mb-2 text-sm font-medium"
-                >First name</label
-              >
-              <input
-                type="text"
-                class="bg-gray-800 border border-gray-600 text-white rounded-md block w-full px-4 py-2"
-                placeholder="Lucie"
-                name="firstName"
-                value="{{ .CurrentUser.FirstName }}"
-              />
-            </div>
-          </div>
-
           <div>
-            <label for="email" class="block mb-2 text-sm font-medium"
-              >Email</label
+            <label for="title" class="block mb-2 text-sm font-medium"
+              >Title</label
             >
             <input
               class="bg-gray-800 border border-gray-600 text-white rounded-md block w-full px-4 py-2"
-              type="email"
-              placeholder="lucie12@gmail.com"
-              name="email"
-              value="{{ .CurrentUser.Email }}"
+              type="text"
+              placeholder="The funniest album of the year"
+              name="title"
+            />
+          </div>
+          <div>
+            <label for="author" class="block mb-2 text-sm font-medium"
+              >Author</label
+            >
+            <input
+              class="bg-gray-800 border border-gray-600 text-white rounded-md block w-full px-4 py-2"
+              type="text"
+              placeholder="Jeanne"
+              name="author"
+            />
+          </div>
+
+          <div>
+            <label for="category" class="block mb-2 text-sm font-medium"
+              >Category</label
+            >
+            <select
+              class="bg-gray-800 border border-gray-600 text-white rounded-md block w-full px-4 py-2"
+              name="category"
+            >
+              <option value="Rap">Rap</option>
+              <option value="Pop">Pop</option>
+              <option value="Country">Country</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="content" class="block mb-2 text-sm font-medium"
+              >Content</label
+            >
+            <textarea
+              name="content"
+              class="bg-gray-800 border border-gray-600 text-white rounded-md block w-full px-4 py-2"
+              placeholder="This is a post about the funniest album of the year"
+            ></textarea>
+          </div>
+
+          <div>
+            <label for="date" class="block mb-2 text-sm font-medium"
+              >Date</label
+            >
+            <input
+              name="date"
+              type="date"
+              class="bg-gray-800 border border-gray-600 text-white rounded-md block w-full px-4 py-2"
             />
           </div>
         </div>
@@ -150,7 +154,7 @@
           type="submit"
           class="bg-blue-500 text-white py-2 px-4 rounded-full hover:opacity-80 mt-4"
         >
-          Save changes
+          Publish
         </button>
       </form>
     </main>
@@ -169,7 +173,7 @@
 
       <ul class="flex gap-4 text-gray-400">
         <li>
-          <a href="/legalnotice" class="hover:opacity-50">Privacy policy</a>
+          <a href="/mentionslegales" class="hover:opacity-50">Privacy policy</a>
         </li>
         <li>
           <a

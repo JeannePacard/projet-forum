@@ -13,6 +13,7 @@ func Routes() {
 
 	// POSTS
 	http.HandleFunc("/api/posts", controllers.CreatePost)
+	http.HandleFunc("/api/news", controllers.CreateNew)
 	http.HandleFunc("/api/posts/comment/", controllers.AddComment)
 
 	// ADMIN
